@@ -2,6 +2,7 @@ package module6;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
@@ -75,7 +76,7 @@ public class EarthquakeCityMap extends PApplet {
 		else {
 			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
 			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
-		    //earthquakesURL = "2.5_week.atom";
+		    earthquakesURL = "quiz2.atom";
 		}
 		MapUtils.createDefaultEventDispatcher(this, map);
 		
@@ -85,7 +86,7 @@ public class EarthquakeCityMap extends PApplet {
 		//earthquakesURL = "test2.atom";
 		
 		// Uncomment this line to take the quiz
-		//earthquakesURL = "quiz2.atom";
+		earthquakesURL = "quiz2.atom";
 		
 		
 		// (2) Reading in earthquake data and geometric properties
@@ -124,6 +125,7 @@ public class EarthquakeCityMap extends PApplet {
 	    map.addMarkers(quakeMarkers);
 	    map.addMarkers(cityMarkers);
 	    
+	    sortAndPrint(20);
 	    
 	}  // End setup
 	
@@ -139,6 +141,26 @@ public class EarthquakeCityMap extends PApplet {
 	// TODO: Add the method:
 	//   private void sortAndPrint(int numToPrint)
 	// and then call that method from setUp
+	private void sortAndPrint(int numToPrint) {
+		
+		Object list[] = quakeMarkers.toArray();
+		Arrays.sort(list, Collections.reverseOrder());
+		
+        if (numToPrint <= list.length) {
+        	for (int i=0; i<numToPrint; i++) {
+        		System.out.println(list[i].toString());
+        	}
+        }
+        else {
+        	for (int i=0; i<list.length; i++) {
+        		System.out.println(list[i].toString());
+        	}
+        }
+		
+		
+		//Collections.sort(quakeMarkers,quakeMarkers.toArray());
+		
+	}
 	
 	/** Event handler that gets called automatically when the 
 	 * mouse moves.
